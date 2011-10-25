@@ -64,7 +64,7 @@
                     data.countiesBox = $('<select><option value="-" selected>Please choose the county</option></select');
                     $.each(data.options.counties, function(val, text) {
                         data.countiesBox.append(
-                            $('<option></option>').val(data.options.countyPrefix + text).html(text)
+                            $('<option></option>').val(text).html(text)
                         );
                     })
                 } else {
@@ -74,7 +74,6 @@
                 // Do something when the counties box is changed
                 data.countiesBox.change(function() {
                     if ($(this).find(":selected").val() != "-") {
-                        //data.chosenCounty = (typeof($(this).find(":selected").val()) == "undefined") ? $(this).val() : $(this).find(":selected").val();
                         $this.gmapsFineTuner('setCounty', (typeof($(this).find(":selected").val()) == "undefined") ? $(this).val() : $(this).find(":selected").val());
                         data.chosenStreet = "";
                         data.chosenTown = "";
@@ -91,7 +90,6 @@
                 data.townsBox = $('<input type="text" value="Town">').hide();
                 // Do something when the towns box is changed
                 data.townsBox.change(function() {
-                    //data.chosenTown = $(this).val() + ", ";
                     $this.gmapsFineTuner('setTown', $(this).val());
                     data.chosenStreet = "";
                     data.gmapsFineTunerMarker.setVisible(false);
@@ -114,7 +112,6 @@
                 data.streetBox = $('<input type="text" value="Address">').hide();
                 // Do something when the towns box is changed
                 data.streetBox.change(function() {
-                    //data.chosenStreet = $(this).val() + ", ";
                     $this.gmapsFineTuner('setStreet', $(this).val());
                     $this.gmapsFineTuner('moveMap', 17);
                 });
@@ -154,7 +151,7 @@
         },
         setCounty : function( county ) {
             var data = $(this).data('gmapsFineTuner');
-            data.chosenCounty = county;
+            data.chosenCounty = data.options.countyPrefix + county;
         },
         setTown : function( town ) {
             var data = $(this).data('gmapsFineTuner');
@@ -195,11 +192,9 @@
         },
         moveMap : function( zoom ) {
             var data = $(this).data('gmapsFineTuner');
-            //function moveMap(zoom) {
                 zoom = (typeof(zoom) == "undefined") ? data.options.startZoom : zoom;
                 // Moves the map to the required location
                 data.fullAddress = data.chosenStreet + data.chosenTown + data.chosenCounty + ", " + data.options.country;
-
 
                 data.gmapsFineTunerGeocoder.geocode( { 'address': data.fullAddress}, function(results, status) {
 
@@ -228,11 +223,7 @@
 
                     data.gmapsFineTunerMap.setZoom(zoom);
 
-
                 });
-
-
-            //}
         }
       };
     
