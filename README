@@ -1,1 +1,51 @@
-Version 0.1.1
+Version 0.1.2
+-------------
+
+This work is licensed under the Creative Commons Attribution-ShareAlike 3.0 Unported License.
+To view a copy of this license, visit http://creativecommons.org/licenses/by-sa/3.0/
+
+
+Usage
+-----
+
+	$(document).ready(function(){
+		$("#yourDiv").gmapsFineTuner();
+	}
+
+
+Options and Defaults
+--------------------
+
+	'startLatLng' : { 'lat' : -34.397, 'lng' : 150.644 },
+	'startZoom' : 6,
+	'country' : "Ireland",
+	'countyPrefix' : '',
+	'counties' : '',
+	'fineTune' : true,
+	
+	Options can be sent when initialising the plugin e.g.
+	
+	$("#yourDiv").gmapsFineTuner( { 'country' : 'United Kingdom', 'counties' : ['Lancashire', 'Cheshire', 'Somerset'] } );
+
+
+Functions
+---------
+
+	$("#yourDiv").gmapsFineTuner('setLocation', '2 High Street', 'Taum', 'Galway');
+		- This will automatically set the map location to the geo location provided
+
+
+Returns
+-------
+
+	Currently the plugin doesn't directly return anything, however it does add a hidden input field storing the co-ordinates in "lat,long" so the div can be placed in the middle of a form to post / get the selected coordinates.
+
+
+CSS
+---
+
+	.gmapsFineTuner-gmapDiv 
+		- The div that google maps is loaded into
+	
+	.gmapsFineTuner-formDiv
+		- The div that the form fields are loaded into
