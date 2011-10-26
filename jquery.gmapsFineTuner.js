@@ -143,23 +143,30 @@
             });
         },
         setLocation : function( street, town, county ) {
+            var data = $(this).data('gmapsFineTuner');
             $(this).gmapsFineTuner('setCounty', county);
             $(this).gmapsFineTuner('setTown', town);
             $(this).gmapsFineTuner('setStreet', street);
             
-            $(this).gmapsFineTuner('moveMap', 17);
+            var zoomLevel;
+            if (street != "" && town != "" && county != "") zoomLevel = 17;
+            else if (town != "" && county != "") zoomLevel = 14;
+            else if (county != "") zoomLevel = 9;
+            else zoomLevel = data.options.startZoom;
+            
+            $(this).gmapsFineTuner('moveMap', zoomLevel);
         },
         setCounty : function( county ) {
             var data = $(this).data('gmapsFineTuner');
-            data.chosenCounty = data.options.countyPrefix + county;
+            data.chosenCounty = (county != "") ? data.options.countyPrefix + county : "";
         },
         setTown : function( town ) {
             var data = $(this).data('gmapsFineTuner');
-            data.chosenTown = town + ", ";
+            data.chosenTown = (town != "") ? town + ", " : "";
         },
         setStreet : function( street ) {
             var data = $(this).data('gmapsFineTuner');
-            data.chosenStreet = street + ", ";
+            data.chosenStreet = (street != "") ? street + ", " : "";
         },
         createMap : function() {
             var data = $(this).data('gmapsFineTuner');
