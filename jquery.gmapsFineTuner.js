@@ -56,8 +56,6 @@
                 }
                 var data = $this.data('gmapsFineTuner');
                 
-                
-                
                 // BEGIN THE COUNTIES BOX
                 if (data.options.counties.length > 0) {
                     // Counties have been set in the options
@@ -157,14 +155,17 @@
             $(this).gmapsFineTuner('moveMap', zoomLevel);
         },
         setCounty : function( county ) {
+            county = (typeof(county) == "undefined") ? "" : county;
             var data = $(this).data('gmapsFineTuner');
             data.chosenCounty = (county != "") ? data.options.countyPrefix + county : "";
         },
         setTown : function( town ) {
+            town = (typeof(town) == "undefined") ? "" : town;
             var data = $(this).data('gmapsFineTuner');
             data.chosenTown = (town != "") ? town + ", " : "";
         },
         setStreet : function( street ) {
+            street = (typeof(street) == "undefined") ? "" : street;
             var data = $(this).data('gmapsFineTuner');
             data.chosenStreet = (street != "") ? street + ", " : "";
         },
